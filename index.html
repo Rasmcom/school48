@@ -1,0 +1,1298 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>استمارة رغبات توزيع المنهج والتكليفات المدرسية</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --moe-green:#07a869;
+      --moe-teal:#0da9a6;
+      --moe-blue:#3d7eb9;
+      --moe-navy:#15445a;
+      --moe-gold:#c1b489;
+      --ink:#102f3a;
+      --muted:#668089;
+      --line:#dcebec;
+      --soft:#f2f8f8;
+      --danger:#b42318;
+      --success:#087f5b;
+      --warning:#9a6700;
+      --white:#fff;
+      --shadow:0 26px 80px rgba(21,68,90,.13);
+    }
+
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      min-height:100vh;
+      font-family:"Cairo",Tahoma,Arial,sans-serif;
+      color:var(--ink);
+      direction:rtl;
+      background:
+        radial-gradient(circle at 8% 8%, rgba(61,126,185,.16), transparent 28%),
+        radial-gradient(circle at 94% 18%, rgba(7,168,105,.16), transparent 31%),
+        radial-gradient(circle at 50% 110%, rgba(13,169,166,.14), transparent 35%),
+        linear-gradient(135deg,#f6fbfb 0%,#ffffff 48%,#eef8f7 100%);
+      overflow-x:hidden;
+    }
+
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      background-image:
+        linear-gradient(135deg,rgba(21,68,90,.05) 25%,transparent 25%),
+        linear-gradient(225deg,rgba(21,68,90,.045) 25%,transparent 25%);
+      background-size:38px 38px;
+      opacity:.45;
+      mask-image:linear-gradient(to bottom, black 0%, transparent 55%);
+    }
+
+    .top-ribbon{
+      height:12px;
+      background:linear-gradient(90deg,var(--moe-navy),var(--moe-blue),var(--moe-teal),var(--moe-green));
+      box-shadow:0 12px 34px rgba(21,68,90,.16);
+    }
+
+    .wrap{
+      width:min(1240px,calc(100% - 34px));
+      margin:24px auto 34px;
+    }
+
+    .hero{
+      position:relative;
+      overflow:hidden;
+      min-height:260px;
+      border:1px solid rgba(220,235,236,.95);
+      border-radius:34px;
+      background:rgba(255,255,255,.92);
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(16px);
+      padding:28px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:28px;
+      align-items:center;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:620px;
+      height:620px;
+      border-radius:999px;
+      left:-230px;
+      top:-310px;
+      background:linear-gradient(135deg,rgba(7,168,105,.14),rgba(61,126,185,.12));
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:auto -80px -170px auto;
+      width:410px;
+      height:410px;
+      border-radius:999px;
+      background:radial-gradient(circle,rgba(13,169,166,.14),transparent 68%);
+    }
+
+    .hero-content,.brand-card{position:relative;z-index:1}
+
+    .logo-strip{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      margin-bottom:18px;
+    }
+
+    .logo-box{
+      width:205px;
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:white;
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:10px 16px;
+      box-shadow:0 14px 34px rgba(21,68,90,.08);
+    }
+
+    .logo-box img{
+      width:100%;
+      max-height:68px;
+      object-fit:contain;
+      display:block;
+    }
+
+    .mini-badge{
+      width:fit-content;
+      padding:9px 14px;
+      border-radius:999px;
+      background:linear-gradient(135deg,rgba(7,168,105,.10),rgba(13,169,166,.10));
+      color:var(--moe-navy);
+      border:1px solid rgba(13,169,166,.18);
+      font-size:13px;
+      font-weight:900;
+    }
+
+    h1{
+      margin:0;
+      color:var(--moe-navy);
+      font-size:32px;
+      line-height:1.7;
+      font-weight:900;
+      letter-spacing:-.5px;
+    }
+
+    .lead{
+      margin:10px 0 0;
+      max-width:760px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:2;
+      font-weight:700;
+    }
+
+    .brand-card{
+      border-radius:30px;
+      padding:24px;
+      background:
+        linear-gradient(135deg,rgba(21,68,90,.94),rgba(13,169,166,.78)),
+        radial-gradient(circle at 15% 20%,rgba(255,255,255,.26),transparent 28%);
+      color:white;
+      box-shadow:0 20px 54px rgba(21,68,90,.22);
+      min-height:198px;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .brand-card .label{
+      color:rgba(255,255,255,.78);
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .brand-card .big{
+      font-size:34px;
+      font-weight:900;
+      line-height:1.5;
+      margin:8px 0;
+    }
+
+    .brand-card .small{
+      color:rgba(255,255,255,.82);
+      font-size:14px;
+      font-weight:700;
+      line-height:1.9;
+    }
+
+    .toolbar{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:22px;
+    }
+
+    button,.file-btn{
+      border:0;
+      border-radius:17px;
+      min-height:50px;
+      padding:0 20px;
+      font-family:inherit;
+      font-size:15px;
+      font-weight:900;
+      cursor:pointer;
+      transition:.2s ease;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      text-decoration:none;
+    }
+
+    .btn-primary{
+      color:#fff;
+      background:linear-gradient(135deg,var(--moe-teal),var(--moe-green));
+      box-shadow:0 15px 32px rgba(7,168,105,.22);
+    }
+
+    .btn-secondary{
+      color:var(--moe-navy);
+      background:#fff;
+      border:1px solid var(--line);
+      box-shadow:0 10px 22px rgba(21,68,90,.06);
+    }
+
+    button:hover,.file-btn:hover{transform:translateY(-1px)}
+    button:active,.file-btn:active{transform:translateY(0)}
+
+    .panel{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns:360px 1fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .side-card,.form-card{
+      border:1px solid var(--line);
+      border-radius:30px;
+      background:rgba(255,255,255,.94);
+      box-shadow:0 18px 60px rgba(21,68,90,.09);
+      overflow:hidden;
+    }
+
+    .side-card{position:sticky;top:16px}
+
+    .card-head{
+      padding:18px 22px;
+      background:linear-gradient(135deg,rgba(21,68,90,.95),rgba(13,169,166,.76));
+      color:white;
+    }
+
+    .card-head h2{
+      margin:0;
+      font-size:18px;
+      font-weight:900;
+    }
+
+    .card-head p{
+      margin:6px 0 0;
+      color:rgba(255,255,255,.78);
+      font-size:12px;
+      font-weight:700;
+      line-height:1.8;
+    }
+
+    .meter-box{padding:18px}
+
+    .meter{
+      height:18px;
+      border-radius:999px;
+      overflow:hidden;
+      background:#e9f3f3;
+      border:1px solid #dcebec;
+    }
+
+    .meter span{
+      display:block;
+      height:100%;
+      width:0%;
+      background:linear-gradient(90deg,var(--moe-green),var(--moe-teal),var(--moe-blue));
+      border-radius:999px;
+      transition:.25s ease;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .stat{
+      text-align:center;
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:12px 8px;
+      background:#fbfefe;
+    }
+
+    .stat b{
+      display:block;
+      color:var(--moe-navy);
+      font-size:24px;
+      line-height:1;
+      font-weight:900;
+    }
+
+    .stat span{
+      color:var(--muted);
+      font-size:11px;
+      font-weight:900;
+    }
+
+    .alert{
+      margin-top:14px;
+      padding:12px 14px;
+      border-radius:18px;
+      background:#fff7e6;
+      color:#7a4d00;
+      border:1px solid #ffe0a6;
+      font-size:12px;
+      line-height:1.9;
+      font-weight:800;
+    }
+
+    .alert.danger{
+      background:#fff3f3;
+      color:var(--danger);
+      border-color:#ffd0d0;
+      display:none;
+    }
+
+    .selected-list{
+      padding:0 18px 18px;
+    }
+
+    .selected-list h3{
+      margin:0 0 10px;
+      font-size:15px;
+      color:var(--moe-navy);
+    }
+
+    .mini-table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:12px;
+      overflow:hidden;
+      border-radius:14px;
+    }
+
+    .mini-table th,.mini-table td{
+      border:1px solid #e2eeee;
+      padding:8px;
+      text-align:center;
+    }
+
+    .mini-table th{
+      background:#eef7f7;
+      color:var(--moe-navy);
+      font-weight:900;
+    }
+
+    .form-card{padding:22px}
+
+    .section{
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:18px;
+      margin-bottom:16px;
+      background:linear-gradient(180deg,#ffffff,#fbfefe);
+    }
+
+    .section-title{
+      margin:0 0 16px;
+      color:var(--moe-navy);
+      font-size:18px;
+      font-weight:900;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .section-title::before{
+      content:"";
+      width:9px;
+      height:28px;
+      border-radius:999px;
+      background:linear-gradient(180deg,var(--moe-green),var(--moe-blue));
+      display:inline-block;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:14px;
+    }
+
+    label{
+      display:block;
+      margin-bottom:7px;
+      color:#234953;
+      font-size:13px;
+      font-weight:900;
+    }
+
+    input,select,textarea{
+      width:100%;
+      border:1px solid #cfe2e5;
+      border-radius:16px;
+      outline:none;
+      background:#fff;
+      min-height:48px;
+      padding:10px 13px;
+      font-family:inherit;
+      font-size:14px;
+      color:#193b45;
+      transition:.2s ease;
+    }
+
+    textarea{min-height:94px;resize:vertical;line-height:1.8}
+
+    input:focus,select:focus,textarea:focus{
+      border-color:#91d8d7;
+      box-shadow:0 0 0 4px rgba(13,169,166,.10);
+    }
+
+    .class-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:10px;
+    }
+
+    .class-item{
+      position:relative;
+      border:1px solid #dcebec;
+      border-radius:18px;
+      background:#fff;
+      overflow:hidden;
+      transition:.2s ease;
+    }
+
+    .class-item:hover{
+      transform:translateY(-1px);
+      box-shadow:0 12px 26px rgba(21,68,90,.08);
+    }
+
+    .class-item input{display:none}
+
+    .class-item label{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin:0;
+      padding:13px;
+      cursor:pointer;
+    }
+
+    .class-name{
+      font-weight:900;
+      color:#203f48;
+    }
+
+    .hours-badge{
+      min-width:58px;
+      padding:5px 9px;
+      border-radius:999px;
+      color:#22636c;
+      background:#eaf7f7;
+      text-align:center;
+      font-size:12px;
+      font-weight:900;
+    }
+
+    .class-item:has(input:checked){
+      border-color:rgba(7,168,105,.55);
+      background:linear-gradient(135deg,rgba(7,168,105,.09),rgba(13,169,166,.07));
+    }
+
+    .class-item:has(input:checked) .hours-badge{
+      color:white;
+      background:linear-gradient(135deg,var(--moe-teal),var(--moe-green));
+    }
+
+    .empty{
+      border:1px dashed #cbdfe2;
+      color:var(--muted);
+      text-align:center;
+      padding:28px 16px;
+      border-radius:20px;
+      background:#fbfefe;
+      font-weight:800;
+      line-height:1.9;
+    }
+
+    .tasks{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:10px;
+    }
+
+    .task{
+      border:1px solid #dcebec;
+      border-radius:18px;
+      padding:10px;
+      background:#fff;
+      display:grid;
+      grid-template-columns:auto 1fr 82px;
+      gap:8px;
+      align-items:center;
+    }
+
+    .task input[type="checkbox"]{
+      width:18px;
+      min-height:auto;
+      height:18px;
+      accent-color:var(--moe-green);
+    }
+
+    .task span{
+      font-size:13px;
+      color:#234953;
+      font-weight:800;
+    }
+
+    .task input[type="number"]{
+      min-height:38px;
+      border-radius:12px;
+      text-align:center;
+    }
+
+    .preview{
+      display:none;
+      position:fixed;
+      inset:0;
+      z-index:20;
+      padding:24px;
+      background:rgba(7,38,48,.48);
+      backdrop-filter:blur(6px);
+      overflow:auto;
+    }
+
+    .preview-card{
+      width:min(940px,100%);
+      margin:auto;
+      border-radius:28px;
+      background:white;
+      overflow:hidden;
+      box-shadow:0 35px 100px rgba(0,0,0,.24);
+    }
+
+    .preview-head{
+      padding:18px 22px;
+      background:linear-gradient(135deg,var(--moe-navy),var(--moe-teal));
+      color:white;
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:center;
+    }
+
+    .preview-head h2{margin:0;font-size:18px}
+    .preview-body{padding:24px}
+    .preview-actions{display:flex;gap:10px;flex-wrap:wrap}
+
+    .print-sheet{
+      border:1px solid #d8e4e5;
+      border-radius:18px;
+      padding:22px;
+      min-height:600px;
+    }
+
+    .print-logo{
+      text-align:center;
+      margin-bottom:10px;
+    }
+
+    .print-logo img{
+      width:170px;
+      max-height:70px;
+      object-fit:contain;
+    }
+
+    .print-title{
+      text-align:center;
+      color:var(--moe-navy);
+      font-size:22px;
+      font-weight:900;
+      margin-bottom:18px;
+    }
+
+    table.full{
+      width:100%;
+      border-collapse:collapse;
+      margin:12px 0;
+    }
+
+    table.full th,table.full td{
+      border:1px solid #d8e4e5;
+      padding:9px;
+      text-align:center;
+      font-size:13px;
+    }
+
+    table.full th{
+      background:#edf7f7;
+      color:var(--moe-navy);
+      font-weight:900;
+    }
+
+    .print-note{
+      margin-top:14px;
+      padding:12px;
+      border:1px solid #d8e4e5;
+      border-radius:12px;
+      line-height:2;
+      font-size:13px;
+    }
+
+
+
+    .sig-area{
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:14px;
+      align-items:stretch;
+    }
+
+    .decl-box{
+      border:1px dashed rgba(7,168,105,.45);
+      border-radius:20px;
+      background:linear-gradient(135deg,rgba(7,168,105,.07),rgba(13,169,166,.05));
+      padding:14px 16px;
+      color:#14532d;
+      font-size:13px;
+      font-weight:800;
+      line-height:2;
+    }
+
+    .sig-box{
+      border:1px solid #cfe2e5;
+      border-radius:20px;
+      background:#fff;
+      overflow:hidden;
+      min-height:150px;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .sig-lbl{
+      text-align:center;
+      padding:9px 12px;
+      background:#f1f7f8;
+      color:var(--moe-navy);
+      font-size:13px;
+      font-weight:900;
+      border-bottom:1px solid #dcebec;
+    }
+
+    .sig-space{
+      position:relative;
+      flex:1;
+      min-height:108px;
+      background:
+        linear-gradient(90deg,rgba(21,68,90,.035) 1px,transparent 1px),
+        linear-gradient(0deg,rgba(21,68,90,.035) 1px,transparent 1px),
+        #fff;
+      background-size:18px 18px;
+    }
+
+    #sigCanvas{
+      width:100%;
+      height:100%;
+      display:block;
+      touch-action:none;
+      cursor:crosshair;
+    }
+
+    .sig-actions{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:12px;
+    }
+
+    .btn-danger{
+      color:#fff;
+      background:#c2410c;
+      box-shadow:0 12px 26px rgba(194,65,12,.18);
+    }
+
+    .print-page{
+      width:210mm;
+      min-height:297mm;
+      margin:auto;
+      background:#fff;
+      display:grid;
+      grid-template-rows:9mm 1fr 12.5mm;
+      overflow:hidden;
+    }
+
+    .print-band{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+
+    .print-content{
+      padding:7mm 9mm;
+      min-height:0;
+    }
+
+    .print-signature-row{
+      margin-top:12px;
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:12px;
+      align-items:stretch;
+    }
+
+    .print-sig-box{
+      border:1px solid #d8e4e5;
+      border-radius:12px;
+      overflow:hidden;
+      min-height:108px;
+      background:#fff;
+      display:flex;
+      flex-direction:column;
+    }
+
+    .print-sig-label{
+      background:#edf7f7;
+      color:var(--moe-navy);
+      text-align:center;
+      font-weight:900;
+      padding:5px;
+      font-size:12px;
+      border-bottom:1px solid #d8e4e5;
+    }
+
+    .print-sig-box img{
+      width:100%;
+      height:84px;
+      object-fit:contain;
+      object-position:center center;
+      display:block;
+      padding:8px 12px;
+      flex:1;
+    }
+
+    @media(max-width:980px){
+      .hero,.panel{grid-template-columns:1fr}
+      .side-card{position:relative;top:0}
+    }
+
+    @media(max-width:680px){
+      .wrap{width:min(100% - 20px,1240px);margin-top:14px}
+      .hero,.form-card{padding:16px;border-radius:24px}
+      h1{font-size:24px}
+      .brand-card .big{font-size:26px}
+      .grid,.class-grid,.tasks,.sig-area,.print-signature-row{grid-template-columns:1fr}
+      .logo-strip{align-items:flex-start;flex-direction:column}
+      .task{grid-template-columns:auto 1fr}
+      .task input[type="number"]{grid-column:1 / -1}
+    }
+
+    @media print{
+      @page{size:A4 portrait;margin:0;}
+      html,body{width:210mm!important;min-height:297mm!important;background:#fff!important;margin:0!important;padding:0!important;overflow:hidden!important;}
+      .top-ribbon,.hero,.panel,.preview-head{display:none!important}
+      .preview{display:block!important;position:static;background:white;padding:0;backdrop-filter:none;overflow:hidden!important}
+      .preview-card{box-shadow:none;border-radius:0;width:210mm!important;margin:0!important;overflow:hidden!important}
+      .preview-body{padding:0!important}
+      .print-page{width:210mm!important;height:297mm!important;min-height:297mm!important;margin:0!important;box-shadow:none!important;break-inside:avoid!important;page-break-inside:avoid!important}
+      .print-content{padding:6.5mm 8mm!important;overflow:hidden!important}
+      .print-sheet{border:0;border-radius:0;padding:0!important;min-height:auto!important}
+    }
+  </style>
+</head>
+<body>
+  <div class="top-ribbon"></div>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="logo-strip">
+          <div class="logo-box">
+            <img src="logomoe.png" alt="شعار وزارة التعليم" onerror="this.style.display='none'">
+          </div>
+          <div class="mini-badge">نموذج تفاعلي متوافق مع الخطة الدراسية</div>
+        </div>
+        <h1>استمارة رغبات توزيع المنهج والتكليفات المدرسية</h1>
+        <p class="lead">
+          نموذج احترافي يساعد المعلم/المعلمة على اختيار التخصص والشعب المرغوبة، مع احتساب النصاب آليًا وفق الخطة الدراسية ومنع تجاوز 24 حصة أسبوعيًا.
+        </p>
+        <div class="toolbar">
+          <button class="btn-primary" type="button" onclick="openPreview()">معاينة الاستمارة</button>
+          <button class="btn-secondary" type="button" onclick="doPrint()">طباعة مباشرة</button>
+          <button class="btn-secondary" type="button" onclick="resetForm()">مسح الاختيارات</button>
+        </div>
+      </div>
+
+      <aside class="brand-card">
+        <div>
+          <div class="label">العام الدراسي</div>
+          <div class="big">توزيع مبدئي منظم</div>
+        </div>
+        <div class="small">
+          يعتمد التوزيع النهائي على احتياج المدرسة ومصلحة العمل، مع مراعاة الرغبات قدر الإمكان.
+        </div>
+      </aside>
+    </section>
+
+    <section class="panel">
+      <aside class="side-card">
+        <div class="card-head">
+          <h2>مؤشر النصاب</h2>
+          <p>يتم التحديث مباشرة عند اختيار الشعب.</p>
+        </div>
+        <div class="meter-box">
+          <div class="meter"><span id="meterFill"></span></div>
+          <div class="stats">
+            <div class="stat"><b id="totalHours">0</b><span>الحالي</span></div>
+            <div class="stat"><b>24</b><span>الحد الأعلى</span></div>
+            <div class="stat"><b id="remainingHours">24</b><span>المتبقي</span></div>
+          </div>
+          <div class="alert">اختيار الشعب مرتبط بالتخصص والخطة الدراسية لكل صف.</div>
+          <div id="warning" class="alert danger">لا يمكن تجاوز النصاب الأعلى 24 حصة أسبوعيًا.</div>
+        </div>
+        <div class="selected-list">
+          <h3>ملخص الاختيارات</h3>
+          <table class="mini-table">
+            <thead><tr><th>الصف</th><th>الشعبة</th><th>الحصص</th></tr></thead>
+            <tbody id="miniSummary"><tr><td colspan="3">لا توجد اختيارات</td></tr></tbody>
+          </table>
+        </div>
+      </aside>
+
+      <section class="form-card" id="mainForm">
+        <div class="section">
+          <h2 class="section-title">أولاً: البيانات الأساسية</h2>
+          <div class="grid">
+            <div>
+              <label>اسم المعلم / المعلمة</label>
+              <input id="teacherName" type="text" placeholder="اكتب الاسم هنا">
+            </div>
+            <div>
+              <label>التخصص</label>
+              <select id="specialty">
+                <option value="">اختر التخصص</option>
+                <option value="islamic">الدراسات الإسلامية</option>
+                <option value="arabic">اللغة العربية</option>
+                <option value="social">الدراسات الاجتماعية</option>
+                <option value="math">الرياضيات</option>
+                <option value="science">العلوم</option>
+                <option value="english">اللغة الإنجليزية</option>
+                <option value="digital">المهارات الرقمية</option>
+                <option value="art">التربية الفنية</option>
+                <option value="pe">التربية البدنية والدفاع عن النفس</option>
+                <option value="life">المهارات الحياتية والأسرية</option>
+                <option value="thinking">التفكير الناقد</option>
+                <option value="activity">النشاط</option>
+              </select>
+            </div>
+            <div>
+              <label>رتبة المعلم / المعلمة</label>
+              <select id="teacherRank">
+                <option value="">اختر الرتبة</option>
+                <option>معلم ممارس</option>
+                <option>معلم متقدم</option>
+                <option>معلم خبير</option>
+                <option>مساعد معلم</option>
+              </select>
+            </div>
+            <div>
+              <label>المؤهل العلمي</label>
+              <input id="qualification" type="text" placeholder="مثال: بكالوريوس">
+            </div>
+            <div>
+              <label>سنوات الخبرة</label>
+              <input id="experience" type="text" placeholder="مثال: 8 سنوات">
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">ثانياً: رغبات توزيع المنهج</h2>
+          <div id="classesContainer" class="class-grid">
+            <div class="empty">اختاري/اختر التخصص أولاً لعرض الصفوف والشعب المتاحة.</div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">ثالثاً: ملاحظات خاصة بالتوزيع</h2>
+          <textarea id="notes" placeholder="تكتب هنا أي ملاحظات خاصة بالتوزيع إن وجدت"></textarea>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">رابعاً: التكليفات المدرسية المرغوبة</h2>
+          <div class="tasks" id="tasksContainer"></div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">خامساً: التشاور بين أعضاء التخصص</h2>
+          <div class="grid">
+            <div>
+              <label>هل تم التشاور مع أعضاء التخصص؟</label>
+              <select id="consult">
+                <option value="">اختر</option>
+                <option>نعم</option>
+                <option>لا</option>
+              </select>
+            </div>
+            <div>
+              <label>أسماء من تم التشاور معهم</label>
+              <input id="consultNames" type="text" placeholder="اختياري">
+            </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">سادساً: مرئيات ومقترحات</h2>
+          <textarea id="suggestions" placeholder="مرئيات المعلم/المعلمة ومقترحاته"></textarea>
+        </div>
+
+        <div class="section">
+          <h2 class="section-title">سابعاً: الإقرار والتوقيع الإلكتروني</h2>
+          <div class="sig-area">
+            <div class="decl-box">
+              أقر بأن البيانات والرغبات الواردة أعلاه تمثل رغبتي الحالية، مع علمي بأن توزيع المنهج والتكليفات يتم وفق الاحتياج التعليمي ومصلحة العمل، وأن للإدارة المدرسية حق اعتماد التوزيع المناسب وفق المصلحة التعليمية والتنظيمية للمدرسة.
+              <br>
+              <strong id="hDate">التاريخ: .........................</strong>
+            </div>
+            <div>
+              <div class="sig-box">
+                <div class="sig-lbl">توقيع المعلم / المعلمة</div>
+                <div class="sig-space"><canvas id="sigCanvas"></canvas></div>
+              </div>
+              <div class="sig-actions">
+                <button class="btn-danger" type="button" onclick="clearSig()">مسح التوقيع</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <section id="preview" class="preview" aria-live="polite">
+    <div class="preview-card">
+      <div class="preview-head">
+        <h2>معاينة الاستمارة قبل الطباعة</h2>
+        <div class="preview-actions">
+          <button class="btn-secondary" type="button" onclick="window.print()">طباعة</button>
+          <button class="btn-secondary" type="button" onclick="closePreview()">إغلاق</button>
+        </div>
+      </div>
+      <div class="preview-body">
+        <div class="print-page">
+          <img src="background4.jpg" class="print-band" alt="">
+          <div class="print-content"><div class="print-sheet" id="printSheet"></div></div>
+          <img src="background5.jpg" class="print-band" alt="">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const maxHours = 24;
+
+    const subjectNames = {
+      islamic:"القرآن الكريم والدراسات الإسلامية",
+      arabic:"اللغة العربية",
+      social:"الدراسات الاجتماعية",
+      math:"الرياضيات",
+      science:"العلوم",
+      english:"اللغة الإنجليزية",
+      digital:"المهارات الرقمية",
+      art:"التربية الفنية",
+      pe:"التربية البدنية والدفاع عن النفس",
+      life:"المهارات الحياتية والأسرية",
+      thinking:"التفكير الناقد",
+      activity:"النشاط"
+    };
+
+    const studyPlan = {
+      "رابع": { islamic:5, arabic:5, social:2, math:6, science:4, english:3, digital:2, art:1, pe:2, life:1, activity:2 },
+      "خامس": { islamic:5, arabic:5, social:2, math:6, science:4, english:3, digital:2, art:1, pe:2, life:1, activity:2 },
+      "سادس": { islamic:5, arabic:5, social:2, math:6, science:4, english:3, digital:2, art:1, pe:2, life:1, activity:2 },
+      "أول متوسط": { islamic:5, arabic:5, social:3, math:6, science:4, english:4, digital:2, art:2, pe:2, life:1, thinking:0, activity:1 },
+      "ثاني متوسط": { islamic:5, arabic:5, social:3, math:6, science:4, english:4, digital:2, art:2, pe:2, life:1, thinking:0, activity:1 },
+      "ثالث متوسط": { islamic:5, arabic:4, social:2, math:6, science:4, english:4, digital:2, art:2, pe:2, life:1, thinking:2, activity:1 }
+    };
+
+    const grades = ["رابع","خامس","سادس","أول متوسط","ثاني متوسط","ثالث متوسط"];
+    const tasks = ["رائد / رائدة إذاعة مدرسية","التوجيه الصحي","منسق / منسقة الموهوبين","الشراكة المجتمعية","النظام المدرسي","النشاط الطلابي","الأمن والسلامة","الجودة","مصادر التعلم","أخرى"];
+
+    const $ = (id)=>document.getElementById(id);
+
+    let sigCanvas, sigCtx, drawing=false, lastX=0, lastY=0;
+
+    function setHijriDate(){
+      try{
+        const hDate = new Intl.DateTimeFormat('ar-SA-u-ca-islamic',{day:'numeric',month:'long',year:'numeric'}).format(new Date());
+        if($('hDate')) $('hDate').textContent = 'التاريخ: ' + hDate;
+      }catch(e){
+        if($('hDate')) $('hDate').textContent = 'التاريخ: .........................';
+      }
+    }
+
+    function initSignature(){
+      sigCanvas = $('sigCanvas');
+      if(!sigCanvas) return;
+      sigCtx = sigCanvas.getContext('2d');
+      resizeCanvas();
+      sigCanvas.addEventListener('mousedown',startDraw);
+      sigCanvas.addEventListener('mousemove',moveDraw);
+      sigCanvas.addEventListener('mouseup',endDraw);
+      sigCanvas.addEventListener('mouseleave',endDraw);
+      sigCanvas.addEventListener('touchstart',startDraw,{passive:false});
+      sigCanvas.addEventListener('touchmove',moveDraw,{passive:false});
+      sigCanvas.addEventListener('touchend',endDraw);
+      window.addEventListener('resize',resizeCanvas);
+    }
+
+    function resizeCanvas(){
+      if(!sigCanvas || !sigCtx) return;
+      const ratio = window.devicePixelRatio || 1;
+      const rect = sigCanvas.getBoundingClientRect();
+      const temp = document.createElement('canvas');
+      temp.width = sigCanvas.width;
+      temp.height = sigCanvas.height;
+      if(temp.width && temp.height) temp.getContext('2d').drawImage(sigCanvas,0,0);
+      sigCanvas.width = Math.max(1,Math.floor(rect.width*ratio));
+      sigCanvas.height = Math.max(1,Math.floor(rect.height*ratio));
+      sigCtx.setTransform(1,0,0,1,0,0);
+      sigCtx.scale(ratio,ratio);
+      sigCtx.lineWidth = 2.3;
+      sigCtx.lineCap = 'round';
+      sigCtx.lineJoin = 'round';
+      sigCtx.strokeStyle = '#0a2440';
+      if(temp.width && temp.height) sigCtx.drawImage(temp,0,0,rect.width,rect.height);
+    }
+
+    function pointFromEvent(e){
+      const rect = sigCanvas.getBoundingClientRect();
+      const touch = e.touches ? e.touches[0] : e;
+      return {x:touch.clientX-rect.left, y:touch.clientY-rect.top};
+    }
+
+    function startDraw(e){
+      e.preventDefault();
+      drawing = true;
+      const p = pointFromEvent(e);
+      lastX = p.x; lastY = p.y;
+    }
+
+    function moveDraw(e){
+      if(!drawing) return;
+      e.preventDefault();
+      const p = pointFromEvent(e);
+      sigCtx.beginPath();
+      sigCtx.moveTo(lastX,lastY);
+      sigCtx.lineTo(p.x,p.y);
+      sigCtx.stroke();
+      lastX = p.x; lastY = p.y;
+    }
+
+    function endDraw(){drawing=false;}
+
+    function clearSig(){
+      if(!sigCanvas || !sigCtx) return;
+      sigCtx.clearRect(0,0,sigCanvas.width,sigCanvas.height);
+    }
+
+    function getSignatureData(){
+      try{
+        if(!sigCanvas) return '';
+
+        const w = sigCanvas.width;
+        const h = sigCanvas.height;
+        const data = sigCtx.getImageData(0,0,w,h);
+        let minX=w, minY=h, maxX=0, maxY=0, found=false;
+
+        for(let y=0; y<h; y++){
+          for(let x=0; x<w; x++){
+            const a = data.data[(y*w+x)*4+3];
+            if(a > 8){
+              found=true;
+              if(x<minX) minX=x;
+              if(y<minY) minY=y;
+              if(x>maxX) maxX=x;
+              if(y>maxY) maxY=y;
+            }
+          }
+        }
+
+        if(!found) return '';
+
+        const pad = 18;
+        minX = Math.max(0, minX-pad);
+        minY = Math.max(0, minY-pad);
+        maxX = Math.min(w, maxX+pad);
+        maxY = Math.min(h, maxY+pad);
+
+        const cropW = Math.max(1, maxX-minX);
+        const cropH = Math.max(1, maxY-minY);
+        const out = document.createElement('canvas');
+        out.width = cropW;
+        out.height = cropH;
+        out.getContext('2d').drawImage(sigCanvas, minX, minY, cropW, cropH, 0, 0, cropW, cropH);
+        return out.toDataURL('image/png');
+      }catch(e){return '';}
+    }
+
+    function doPrint(){
+      openPreview();
+      setTimeout(()=>window.print(),150);
+    }
+
+
+    document.addEventListener("DOMContentLoaded",()=>{
+      buildTasks();
+      setHijriDate();
+      initSignature();
+      $("specialty").addEventListener("change", buildClasses);
+    });
+
+    function buildTasks(){
+      $("tasksContainer").innerHTML = tasks.map((t,i)=>`
+        <label class="task">
+          <input type="checkbox" data-task="${t}">
+          <span>${t}</span>
+          <input type="number" min="1" max="10" placeholder="الأولوية">
+        </label>
+      `).join("");
+    }
+
+    function buildClasses(){
+      const selected = $("specialty").value;
+      $("warning").style.display = "none";
+      if(!selected){
+        $("classesContainer").innerHTML = `<div class="empty">اختاري/اختر التخصص أولاً لعرض الصفوف والشعب المتاحة.</div>`;
+        updateSummary();
+        return;
+      }
+
+      let html = "";
+      grades.forEach(grade=>{
+        const hours = studyPlan[grade][selected];
+        if(!hours) return;
+        for(let section=1; section<=3; section++){
+          const id = `${grade}-${section}`.replace(/\s+/g,"-");
+          html += `
+            <div class="class-item">
+              <input id="${id}" type="checkbox" data-grade="${grade}" data-section="${section}" data-hours="${hours}">
+              <label for="${id}">
+                <span class="class-name">${grade} / ${section}</span>
+                <span class="hours-badge">${hours} حصص</span>
+              </label>
+            </div>
+          `;
+        }
+      });
+
+      $("classesContainer").innerHTML = html || `<div class="empty">لا توجد شعب مرتبطة بهذا التخصص في الخطة الحالية.</div>`;
+      document.querySelectorAll("#classesContainer input").forEach(cb=>cb.addEventListener("change", handleCheck));
+      updateSummary();
+    }
+
+    function handleCheck(e){
+      if(calculateTotal() > maxHours){
+        e.target.checked = false;
+        $("warning").style.display = "block";
+      }else{
+        $("warning").style.display = "none";
+      }
+      updateSummary();
+    }
+
+    function calculateTotal(){
+      let total = 0;
+      document.querySelectorAll("#classesContainer input:checked").forEach(cb=>total += Number(cb.dataset.hours));
+      return total;
+    }
+
+    function selectedRows(){
+      return [...document.querySelectorAll("#classesContainer input:checked")].map(cb=>({
+        subject: subjectNames[$("specialty").value] || "",
+        grade: cb.dataset.grade,
+        section: cb.dataset.section,
+        hours: Number(cb.dataset.hours)
+      }));
+    }
+
+    function updateSummary(){
+      const total = calculateTotal();
+      $("totalHours").textContent = total;
+      $("remainingHours").textContent = maxHours - total;
+      $("meterFill").style.width = Math.min(100,(total/maxHours)*100) + "%";
+
+      const rows = selectedRows();
+      $("miniSummary").innerHTML = rows.length
+        ? rows.map(r=>`<tr><td>${r.grade}</td><td>${r.section}</td><td>${r.hours}</td></tr>`).join("")
+        : `<tr><td colspan="3">لا توجد اختيارات</td></tr>`;
+    }
+
+    function resetForm(){
+      document.querySelectorAll("input, textarea").forEach(el=>{
+        if(el.type==="checkbox" || el.type==="radio") el.checked = false;
+        else el.value = "";
+      });
+      $("specialty").value = "";
+      $("consult").value = "";
+      clearSig();
+      buildClasses();
+    }
+
+    function checkedTasks(){
+      return [...document.querySelectorAll(".task")].filter(task=>task.querySelector('input[type="checkbox"]').checked).map(task=>{
+        const name = task.querySelector('input[type="checkbox"]').dataset.task;
+        const pr = task.querySelector('input[type="number"]')?.value || "";
+        return {name, pr};
+      });
+    }
+
+    function esc(v){
+      return String(v || "—").replace(/[&<>"']/g, m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+    }
+
+    function openPreview(){
+      const rows = selectedRows();
+      const total = calculateTotal();
+      const taskRows = checkedTasks();
+      const sigData = getSignatureData();
+      const dateText = $("hDate") ? $("hDate").textContent : "التاريخ: .........................";
+      $("printSheet").innerHTML = `
+        <div class="print-logo"><img src="logomoe.png" alt="شعار وزارة التعليم" onerror="this.style.display='none'"></div>
+        <div class="print-title">استمارة رغبات توزيع المنهج والتكليفات المدرسية</div>
+
+        <table class="full">
+          <tr><th>اسم المعلم/المعلمة</th><td>${esc($("teacherName").value)}</td><th>التخصص</th><td>${esc(subjectNames[$("specialty").value])}</td></tr>
+          <tr><th>رتبة المعلم/المعلمة</th><td>${esc($("teacherRank").value)}</td><th>المؤهل العلمي</th><td>${esc($("qualification").value)}</td></tr>
+          <tr><th>سنوات الخبرة</th><td colspan="3">${esc($("experience").value)}</td></tr>
+        </table>
+
+        <table class="full">
+          <thead><tr><th>المادة</th><th>الصف</th><th>الشعبة</th><th>عدد الحصص</th></tr></thead>
+          <tbody>
+            ${rows.length ? rows.map(r=>`<tr><td>${esc(r.subject)}</td><td>${esc(r.grade)}</td><td>${esc(r.section)}</td><td>${r.hours}</td></tr>`).join("") : `<tr><td colspan="4">لم يتم اختيار شعب.</td></tr>`}
+            <tr><th colspan="3">إجمالي النصاب</th><th>${total} / 24</th></tr>
+          </tbody>
+        </table>
+
+        <table class="full">
+          <thead><tr><th>التكليف المدرسي المرغوب</th><th>الأولوية</th></tr></thead>
+          <tbody>
+            ${taskRows.length ? taskRows.map(t=>`<tr><td>${esc(t.name)}</td><td>${esc(t.pr)}</td></tr>`).join("") : `<tr><td colspan="2">لم يتم اختيار تكليفات.</td></tr>`}
+          </tbody>
+        </table>
+
+        <div class="print-note"><b>ملاحظات خاصة بالتوزيع:</b><br>${esc($("notes").value)}</div>
+        <div class="print-note"><b>التشاور بين أعضاء التخصص:</b> ${esc($("consult").value)}<br><b>الأسماء:</b> ${esc($("consultNames").value)}</div>
+        <div class="print-note"><b>مرئيات ومقترحات:</b><br>${esc($("suggestions").value)}</div>
+
+        <div class="print-signature-row">
+          <div class="print-note" style="margin-top:0">
+            أقر بأن البيانات والرغبات الواردة أعلاه تمثل رغبتي الحالية، مع علمي بأن توزيع المنهج والتكليفات يتم وفق الاحتياج التعليمي ومصلحة العمل.
+            ويُعد هذا التوزيع توزيعًا مبدئيًا مبنيًا على الوضع الراهن للمدرسة واحتياجها الحالي، ويخضع للمراجعة والتعديل عند حدوث أي متغيرات.
+            <br><b>${esc(dateText)}</b>
+            <br>اسم المعلم/المعلمة: ${esc($("teacherName").value)}
+          </div>
+          <div class="print-sig-box">
+            <div class="print-sig-label">التوقيع الإلكتروني</div>
+            ${sigData ? `<img src="${sigData}" alt="التوقيع الإلكتروني">` : `<div style="height:84px;display:flex;align-items:center;justify-content:center;color:#99a; font-weight:800;">لم يتم توقيع الاستمارة</div>`}
+          </div>
+        </div>
+      `;
+      $("preview").style.display = "block";
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+
+    function closePreview(){
+      $("preview").style.display = "none";
+    }
+  </script>
+</body>
+</html>

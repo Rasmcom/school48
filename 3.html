@@ -1137,8 +1137,8 @@
     /* تعديل مطلوب: تكبير التوقيع قليلاً وترك مسافة بين الصفة والاسم دون نقاط */
     .print-sig-box,
     .compact-print .print-sig-box{
-      min-height:88px!important;
-      max-height:108px!important;
+      min-height:76px!important;
+      max-height:92px!important;
     }
     .print-sig-label,
     .compact-print .print-sig-label{
@@ -1148,9 +1148,9 @@
     }
     .print-sig-box img,
     .compact-print .print-sig-box img{
-      width:99%!important;
-      height:75px!important;
-      max-height:75px!important;
+      width:66%!important;
+      height:50px!important;
+      max-height:50px!important;
       object-fit:contain!important;
       object-position:center center!important;
       display:block!important;
@@ -1189,7 +1189,122 @@
       text-decoration:none!important;
     }
 
-  </style>
+  
+
+    /* إصلاح طباعة الجوال: صفحة واحدة بدون تصغير ديناميكي وبدون صفحة بيضاء */
+    .print-sheet.fit-one-page,
+    .compact-print.fit-one-page{
+      transform:none!important;
+      width:100%!important;
+      max-width:100%!important;
+    }
+
+    /* تكبير التوقيع بنسبة أوضح مع المحافظة على المساحة العامة */
+    .print-sig-box,
+    .compact-print .print-sig-box{
+      min-height:92px!important;
+      max-height:108px!important;
+    }
+    .print-sig-label,
+    .compact-print .print-sig-label{
+      font-size:10px!important;
+      padding:3px 5px!important;
+      line-height:1.25!important;
+    }
+    .print-sig-box img,
+    .compact-print .print-sig-box img{
+      width:82%!important;
+      height:68px!important;
+      max-height:68px!important;
+      object-fit:contain!important;
+      object-position:center center!important;
+      display:block!important;
+      margin:auto!important;
+      padding:1px 2px!important;
+      flex:0 0 auto!important;
+    }
+
+    /* مسافة واضحة بين الصفة والاسم دون نقاط */
+    .admin-footer,
+    .compact-print .admin-footer{
+      margin-top:2.8mm!important;
+      padding-top:3.4mm!important;
+      min-height:30px!important;
+    }
+    .admin-person,
+    .compact-print .admin-person{
+      min-height:25px!important;
+      gap:3.8mm!important;
+      justify-content:flex-start!important;
+    }
+    .admin-person b,
+    .compact-print .admin-person b,
+    .admin-person span,
+    .compact-print .admin-person span{
+      border:0!important;
+      text-decoration:none!important;
+    }
+
+    @media print{
+      @page{size:A4 portrait;margin:0;}
+      html,body{
+        width:210mm!important;
+        height:100%!important;
+        margin:0!important;
+        padding:0!important;
+        background:#fff!important;
+        overflow:hidden!important;
+      }
+      body.printing-now > *:not(#preview){display:none!important;}
+      .preview{
+        display:block!important;
+        position:fixed!important;
+        inset:0!important;
+        width:210mm!important;
+        height:286mm!important;
+        padding:0!important;
+        margin:0!important;
+        background:#fff!important;
+        overflow:hidden!important;
+        backdrop-filter:none!important;
+      }
+      .preview-card,
+      .preview-body{
+        width:210mm!important;
+        height:286mm!important;
+        margin:0!important;
+        padding:0!important;
+        box-shadow:none!important;
+        border-radius:0!important;
+        overflow:hidden!important;
+      }
+      .print-page{
+        width:210mm!important;
+        height:286mm!important;
+        min-height:286mm!important;
+        max-height:286mm!important;
+        margin:0!important;
+        overflow:hidden!important;
+        display:grid!important;
+        grid-template-rows:9mm 1fr 12.5mm!important;
+        break-inside:avoid!important;
+        page-break-inside:avoid!important;
+      }
+      .print-content{
+        padding:3.6mm 6mm!important;
+        overflow:hidden!important;
+        min-height:0!important;
+      }
+      .print-sheet{
+        border:0!important;
+        border-radius:0!important;
+        padding:0!important;
+        min-height:0!important;
+        transform:none!important;
+        width:100%!important;
+      }
+    }
+</style>
 </head>
 <body>
   <div class="top-ribbon"></div>
@@ -1574,21 +1689,16 @@
     });
 
     function fitPrintSheetToOnePage(){
-      const content = document.querySelector(".print-content");
       const sheet = document.getElementById("printSheet");
-      if(!content || !sheet) return;
+      if(!sheet) return;
 
+      /*
+        لا نستخدم transform: scale في الجوال لأنه يسبب تصغير الصفحة وظهور صفحة ثانية فارغة.
+        الاعتماد هنا على CSS مضغوط ثابت مثل منطق استمارة إنهاء المنهج: صفحة A4 واحدة بدون تحجيم ديناميكي.
+      */
       sheet.classList.add("compact-print","fit-one-page");
-      sheet.style.transform = "scale(1)";
+      sheet.style.transform = "none";
       sheet.style.width = "100%";
-
-      const availableH = content.clientHeight - 2;
-      const availableW = content.clientWidth - 2;
-      const neededH = sheet.scrollHeight;
-      const neededW = sheet.scrollWidth;
-      const scale = Math.min(1, availableH / Math.max(1, neededH), availableW / Math.max(1, neededW));
-
-      sheet.style.transform = `scale(${Math.max(0.54, scale)})`;
     }
 
 

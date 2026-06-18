@@ -1268,6 +1268,114 @@
       }
     }
 
+
+    /* نافذة احترافية لتنبيهات النصاب */
+    .quota-modal{
+      position:fixed;
+      inset:0;
+      z-index:99999;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:22px;
+      background:rgba(6,22,32,.48);
+      backdrop-filter:blur(8px);
+    }
+    .quota-modal.show{display:flex;}
+    .quota-card{
+      width:min(440px,100%);
+      border-radius:26px;
+      background:#fff;
+      border:1px solid rgba(220,235,236,.95);
+      box-shadow:0 35px 90px rgba(6,22,32,.28);
+      overflow:hidden;
+      animation:quotaPop .18s ease-out;
+      direction:rtl;
+      text-align:right;
+    }
+    @keyframes quotaPop{
+      from{transform:translateY(10px) scale(.98);opacity:.55;}
+      to{transform:translateY(0) scale(1);opacity:1;}
+    }
+    .quota-card-head{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:18px 20px 14px;
+      background:linear-gradient(135deg,rgba(255,247,230,.96),rgba(255,255,255,.98));
+      border-bottom:1px solid #f2e2c1;
+    }
+    .quota-icon{
+      width:44px;
+      height:44px;
+      border-radius:16px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,#fff3cd,#ffe8a3);
+      color:#8a5a00;
+      font-size:24px;
+      font-weight:900;
+      flex:0 0 auto;
+      border:1px solid #f7d58a;
+    }
+    .quota-title{
+      margin:0;
+      color:#15445a;
+      font-size:18px;
+      font-weight:900;
+      line-height:1.3;
+    }
+    .quota-subtitle{
+      margin:3px 0 0;
+      color:#7a4d00;
+      font-size:12px;
+      font-weight:800;
+      line-height:1.6;
+    }
+    .quota-card-body{
+      padding:18px 20px 6px;
+    }
+    .quota-message{
+      margin:0;
+      color:#263f49;
+      font-size:14px;
+      font-weight:800;
+      line-height:2;
+    }
+    .quota-details{
+      margin-top:12px;
+      padding:10px 12px;
+      border-radius:16px;
+      background:#f8fbfb;
+      border:1px solid #dcebec;
+      color:#31535c;
+      font-size:12px;
+      font-weight:800;
+      line-height:1.9;
+    }
+    .quota-card-actions{
+      padding:14px 20px 20px;
+      display:flex;
+      justify-content:flex-start;
+      gap:10px;
+    }
+    .quota-ok{
+      min-height:42px;
+      border-radius:14px;
+      padding:0 22px;
+      background:linear-gradient(135deg,var(--moe-teal),var(--moe-green));
+      color:#fff;
+      border:0;
+      font-family:inherit;
+      font-size:14px;
+      font-weight:900;
+      cursor:pointer;
+      box-shadow:0 12px 26px rgba(7,168,105,.18);
+    }
+    .quota-ok:hover{transform:translateY(-1px);}
+    body.modal-open{overflow:hidden;}
+
   </style>
 </head>
 <body>
@@ -1315,11 +1423,11 @@
           <div class="meter"><span id="meterFill"></span></div>
           <div class="stats">
             <div class="stat"><b id="totalHours">0</b><span>الحالي</span></div>
-            <div class="stat"><b id="maxHoursDisplay">24</b><span>الحد الأعلى</span></div>
+            <div class="stat"><b id="rankMaxHours">24</b><span>الحد الأعلى</span></div>
             <div class="stat"><b id="remainingHours">24</b><span>المتبقي</span></div>
           </div>
           <div class="alert">اختيار الشعب مرتبط بالتخصص والخطة الدراسية لكل صف.</div>
-          <div id="warning" class="alert danger">لا يمكن إضافة هذه الشعبة بسبب اكتمال نصاب الرتبة المختارة.</div>
+          <div id="warning" class="alert danger">لا يمكن إضافة هذه الشعبة بسبب تجاوز نصاب الرتبة.</div>
         </div>
         <div class="selected-list">
           <h3>ملخص الاختيارات</h3>
@@ -1463,6 +1571,26 @@
     </section>
   </main>
 
+
+  <div id="quotaModal" class="quota-modal" role="dialog" aria-modal="true" aria-labelledby="quotaModalTitle">
+    <div class="quota-card">
+      <div class="quota-card-head">
+        <div class="quota-icon">!</div>
+        <div>
+          <h3 class="quota-title" id="quotaModalTitle">تنبيه النصاب</h3>
+          <p class="quota-subtitle">تم منع الاختيار للمحافظة على نصاب الرتبة المحدد.</p>
+        </div>
+      </div>
+      <div class="quota-card-body">
+        <p class="quota-message" id="quotaModalMessage">لا يمكن تجاوز النصاب المعتمد للرتبة المختارة.</p>
+        <div class="quota-details" id="quotaModalDetails"></div>
+      </div>
+      <div class="quota-card-actions">
+        <button class="quota-ok" type="button" onclick="closeQuotaPopup()">فهمت</button>
+      </div>
+    </div>
+  </div>
+
   <section id="preview" class="preview" aria-live="polite">
     <div class="preview-card">
       <div class="preview-head">
@@ -1486,20 +1614,21 @@
   <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
   <script>
-    const rankMaxHours = {
+    const rankQuota = {
       "مساعد معلم":24,
       "معلم ممارس":24,
       "معلم متقدم":22,
       "معلم خبير":18
     };
+    const defaultMaxHours = 24;
 
     function getMaxHours(){
-      const rank = $("teacherRank")?.value || "";
-      return rankMaxHours[rank] || 24;
+      const rank = $("teacherRank") ? $("teacherRank").value : "";
+      return rankQuota[rank] || defaultMaxHours;
     }
 
-    function getRankText(){
-      return $("teacherRank")?.value || "الرتبة المختارة";
+    function getRankName(){
+      return $("teacherRank") && $("teacherRank").value ? $("teacherRank").value : "الرتبة غير محددة";
     }
 
     const subjectNames = {
@@ -1738,7 +1867,7 @@
       setHijriDate();
       initSignature();
       $("specialty").addEventListener("change", buildClasses);
-      $("teacherRank").addEventListener("change", handleRankChange);
+      $("teacherRank").addEventListener("change", enforceRankLimit);
       updateSummary();
     });
 
@@ -1786,48 +1915,65 @@
 
     function handleCheck(e){
       const max = getMaxHours();
-      if(calculateTotal() > max){
+      const total = calculateTotal();
+      if(total > max){
         e.target.checked = false;
-        showNisabWarning(`لا يمكن إضافة هذه الشعبة؛ نصاب ${getRankText()} لا يتجاوز ${max} حصة.`);
-      }else{
-        hideNisabWarning();
+        const attempted = Number(e.target.dataset.hours || 0);
+        const currentAfterCancel = calculateTotal();
+        showQuotaPopup(
+          `لا يمكن إضافة هذه الشعبة؛ لأن مجموع الحصص سيتجاوز النصاب المعتمد لرتبة ${getRankName()}.`,
+          `النصاب المسموح: ${max} حصة • النصاب الحالي بعد إلغاء الاختيار: ${currentAfterCancel} حصة • الشعبة المطلوبة: ${attempted} حصص`
+        );
       }
+      if($("warning")) $("warning").style.display = "none";
       updateSummary();
     }
 
-    function showNisabWarning(message){
-      const warning = $("warning");
-      if(!warning) return;
-      warning.textContent = message;
-      warning.style.display = "block";
-    }
-
-    function hideNisabWarning(){
-      const warning = $("warning");
-      if(!warning) return;
-      warning.style.display = "none";
-    }
-
-    function handleRankChange(){
+    function enforceRankLimit(){
       const max = getMaxHours();
-      const selected = [...document.querySelectorAll("#classesContainer input:checked")];
-      let removed = 0;
-
-      // عند تخفيض الرتبة بعد اختيار شعب كثيرة، يتم إلغاء آخر الاختيارات تلقائياً
-      // حتى لا يتجاوز المجموع النصاب النظامي للرتبة المختارة نهائياً.
-      for(const cb of selected.reverse()){
-        if(calculateTotal() <= max) break;
-        cb.checked = false;
-        removed++;
+      let total = calculateTotal();
+      if(total > max){
+        const checked = [...document.querySelectorAll("#classesContainer input:checked")].reverse();
+        let removed = 0;
+        checked.forEach(cb=>{
+          if(total > max){
+            cb.checked = false;
+            total -= Number(cb.dataset.hours || 0);
+            removed++;
+          }
+        });
+        showQuotaPopup(
+          `تم ضبط الاختيارات تلقائيًا بعد تغيير الرتبة إلى ${getRankName()}.`,
+          `النصاب المسموح لهذه الرتبة: ${max} حصة • تم إلغاء ${removed} اختيار زائد للحفاظ على النصاب النظامي.`
+        );
       }
-
-      if(removed){
-        showNisabWarning(`تم إلغاء ${removed} من الاختيارات لأن نصاب ${getRankText()} لا يتجاوز ${max} حصة.`);
-      }else{
-        hideNisabWarning();
-      }
+      if($("warning")) $("warning").style.display = "none";
       updateSummary();
     }
+
+    function showQuotaPopup(message, details=""){
+      const modal = $("quotaModal");
+      if(!modal) return;
+      $("quotaModalMessage").textContent = message;
+      $("quotaModalDetails").textContent = details;
+      $("quotaModalDetails").style.display = details ? "block" : "none";
+      modal.classList.add("show");
+      document.body.classList.add("modal-open");
+    }
+
+    function closeQuotaPopup(){
+      const modal = $("quotaModal");
+      if(modal) modal.classList.remove("show");
+      document.body.classList.remove("modal-open");
+    }
+
+    document.addEventListener("keydown", e=>{
+      if(e.key === "Escape") closeQuotaPopup();
+    });
+
+    document.addEventListener("click", e=>{
+      if(e.target && e.target.id === "quotaModal") closeQuotaPopup();
+    });
 
     function calculateTotal(){
       let total = 0;
@@ -1848,7 +1994,7 @@
       const total = calculateTotal();
       const max = getMaxHours();
       $("totalHours").textContent = total;
-      $("maxHoursDisplay").textContent = max;
+      $("rankMaxHours").textContent = max;
       $("remainingHours").textContent = Math.max(0, max - total);
       $("meterFill").style.width = Math.min(100,(total/max)*100) + "%";
 
@@ -1922,7 +2068,7 @@
           <thead><tr><th>المادة</th><th>الصف</th><th>الشعبة</th><th>عدد الحصص</th></tr></thead>
           <tbody>
             ${rows.length ? rows.map(r=>`<tr><td>${esc(r.subject)}</td><td>${esc(r.grade)}</td><td>${esc(r.section)}</td><td>${r.hours}</td></tr>`).join("") : `<tr><td colspan="4">لم يتم اختيار شعب.</td></tr>`}
-            <tr><th colspan="3">إجمالي النصاب حسب الرتبة</th><th>${total} / ${max}</th></tr>
+            <tr><th colspan="3">إجمالي النصاب</th><th>${total} / ${max}</th></tr>
           </tbody>
         </table>
 

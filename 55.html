@@ -1267,109 +1267,316 @@
       }
     }
 
-  
-
-    /* ===============================
-       نظام الطباعة النهائي مأخوذ من منطق 3mtwstah:
-       صفحة A4 حقيقية ثابتة، بدون overlay وبدون transform.
-       =============================== */
-    #printRoot{display:none;}
-    #printRoot .sheet-wrap{width:100%;overflow:auto;padding:10px 0 0;}
-    #printRoot .sheet{margin-inline:auto;}
-    #printRoot .print-main{padding:0 8mm;min-height:0;display:flex;flex-direction:column;}
-    #printRoot .print-sheet{border:0;border-radius:0;padding:0;min-height:auto;width:100%;overflow:hidden;}
-
-    #printRoot .print-header-compact{margin:0 0 2.2mm!important;padding-top:1.2mm!important;display:block!important;}
-    #printRoot .print-brand-row{display:grid!important;grid-template-columns:25mm 1fr!important;gap:4mm!important;align-items:center!important;margin:0 auto 6.5mm!important;max-width:128mm!important;direction:rtl!important;}
-    #printRoot .print-logo-mark{text-align:center!important;line-height:0!important;border-left:1.3px solid #b7bdc1!important;padding-left:4mm!important;}
-    #printRoot .print-logo-mark img{width:21mm!important;max-height:14mm!important;object-fit:contain!important;display:inline-block!important;}
-    #printRoot .print-school-lines{text-align:right!important;color:#061640!important;font-weight:900!important;line-height:1.18!important;}
-    #printRoot .print-school-lines .edu-line{display:block!important;font-size:10.4px!important;margin-bottom:1.1mm!important;white-space:nowrap!important;}
-    #printRoot .print-school-lines .school-line{display:block!important;font-size:12.2px!important;white-space:nowrap!important;}
-    #printRoot .print-header-title{display:block!important;clear:both!important;color:#15445a!important;font-size:18px!important;font-weight:900!important;line-height:1.18!important;margin:0 0 3mm!important;text-align:center!important;}
-
-    #printRoot .print-section-label{margin:1.35mm 0 .7mm!important;padding:2px 6px!important;border-radius:4px!important;background:linear-gradient(135deg,#15445a,#0da9a6)!important;color:#fff!important;font-size:10px!important;font-weight:900!important;line-height:1.2!important;}
-    #printRoot table.full{width:100%!important;border-collapse:collapse!important;margin:1.1mm 0!important;}
-    #printRoot table.full th,#printRoot table.full td{border:1px solid #d8e4e5!important;padding:3.8px 4.5px!important;text-align:center!important;font-size:9.7px!important;line-height:1.28!important;}
-    #printRoot table.full th{background:#edf7f7!important;color:#15445a!important;font-weight:900!important;}
-    #printRoot .notes-table th,#printRoot .notes-table td{font-size:9.3px!important;line-height:1.28!important;padding:3.5px 4.5px!important;}
-    #printRoot .preliminary-box{border:1px solid #f1d08a!important;background:linear-gradient(135deg,#fffbea,#fffdf4)!important;border-radius:7px!important;color:#61430b!important;font-size:8.7px!important;font-weight:800!important;line-height:1.48!important;margin-top:.8mm!important;padding:5px 7px!important;}
-    #printRoot .preliminary-box b{display:block!important;color:#7a4d00!important;font-size:9.8px!important;margin-bottom:1.5px!important;}
-    #printRoot .print-signature-row{margin-top:1mm!important;display:grid!important;grid-template-columns:1.05fr .75fr!important;gap:4px!important;align-items:stretch!important;}
-    #printRoot .print-note{margin-top:0!important;padding:6px 7px!important;border:1px solid #d8e4e5!important;border-radius:8px!important;line-height:1.42!important;font-size:9.2px!important;}
-    #printRoot .print-sig-box{border:1px solid #d8e4e5!important;border-radius:8px!important;overflow:hidden!important;min-height:88px!important;max-height:100px!important;background:#fff!important;display:flex!important;flex-direction:column!important;}
-    #printRoot .print-sig-label{background:#edf7f7!important;color:#15445a!important;text-align:center!important;font-weight:900!important;padding:3px 5px!important;font-size:9.6px!important;border-bottom:1px solid #d8e4e5!important;line-height:1.2!important;}
-    #printRoot .print-sig-box img{width:78%!important;height:66px!important;max-height:66px!important;object-fit:contain!important;object-position:center center!important;display:block!important;margin:auto!important;padding:1px 2px!important;}
-    #printRoot .admin-footer{margin-top:2mm!important;display:grid!important;grid-template-columns:1fr 1fr!important;gap:12px!important;border-top:1px solid #dcebec!important;padding-top:3mm!important;}
-    #printRoot .admin-person{text-align:center!important;min-height:24px!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;gap:3mm!important;}
-    #printRoot .admin-person b{color:#15445a!important;font-size:10.6px!important;font-weight:900!important;line-height:1.15!important;margin:0!important;}
-    #printRoot .admin-person span{color:#374151!important;font-size:10px!important;font-weight:800!important;line-height:1.15!important;margin:0!important;}
-
-    @media print{
-      @page{size:A4 portrait;margin:0;}
-      html,body{
-        width:210mm!important;
-        height:297mm!important;
-        margin:0!important;
-        padding:0!important;
-        background:#fff!important;
-        overflow:hidden!important;
-      }
-      body{display:block!important;}
-      body > *:not(#printRoot){display:none!important;}
-      #printRoot,#printRoot .sheet-wrap{
-        display:block!important;
-        padding:0!important;
-        margin:0!important;
-        background:#fff!important;
-        overflow:hidden!important;
-      }
-      #printRoot{
-        width:210mm!important;
-        height:297mm!important;
-        position:static!important;
-      }
-      #printRoot .sheet{
-        width:210mm!important;
-        height:297mm!important;
-        margin:0!important;
-        box-shadow:none!important;
-        overflow:hidden!important;
-        position:fixed!important;
-        inset:0!important;
-        display:grid!important;
-        grid-template-rows:9mm 1fr 12.5mm!important;
-        break-inside:avoid!important;
-        page-break-inside:avoid!important;
-      }
-      #printRoot .band{
-        width:100%!important;
-        height:100%!important;
-        display:block!important;
-        object-fit:cover!important;
-        object-position:center!important;
-      }
-      #printRoot .main{
-        min-height:0!important;
-        display:flex!important;
-        flex-direction:column!important;
-        padding:0 8mm!important;
-        overflow:hidden!important;
-      }
-      #printRoot .print-sheet{
-        width:100%!important;
-        min-width:0!important;
-        transform:none!important;
-        border:0!important;
-        border-radius:0!important;
-        padding:0!important;
-        margin:0!important;
-        min-height:auto!important;
-        overflow:hidden!important;
-      }
-    }
-
   </style>
+<style>
+
+/* =========================================================
+   FINAL MOBILE PRINT FIX - 3mtwstah printing architecture
+   يطبع عنصر A4 ثابت فقط، بدون preview overlay وبدون transform/scale
+========================================================= */
+#printRoot{
+  display:none;
+}
+body.printing-ready{
+  background:#fff!important;
+  overflow:hidden!important;
+}
+body.printing-ready #printRoot{
+  display:block!important;
+  position:fixed!important;
+  inset:0!important;
+  width:210mm!important;
+  height:297mm!important;
+  z-index:999999!important;
+  background:#fff!important;
+  overflow:hidden!important;
+}
+body.printing-ready > *:not(#printRoot){
+  visibility:hidden!important;
+}
+#printRoot *{
+  box-sizing:border-box;
+  -webkit-print-color-adjust:exact!important;
+  print-color-adjust:exact!important;
+}
+#printRoot .viewer-print{
+  display:block;
+  padding:0;
+  margin:0;
+  background:#fff;
+}
+#printRoot .sheet-wrap-print{
+  display:block;
+  padding:0;
+  margin:0;
+}
+#printRoot .sheet-print{
+  width:210mm;
+  height:297mm;
+  background:#fff;
+  overflow:hidden;
+  display:grid;
+  grid-template-rows:9mm 1fr 12.5mm;
+  position:relative;
+  margin:0;
+  box-shadow:none;
+}
+#printRoot .band-print{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+}
+#printRoot .main-print{
+  min-height:0;
+  display:flex;
+  flex-direction:column;
+  padding:3.6mm 7.2mm 2.8mm;
+  overflow:hidden;
+  font-family:'Cairo',Tahoma,Arial,sans-serif;
+  color:#102f3a;
+}
+#printRoot .brand-print{
+  display:grid;
+  grid-template-columns:26mm 1fr;
+  gap:4mm;
+  align-items:center;
+  width:134mm;
+  margin:0 auto 4.5mm;
+  direction:rtl;
+}
+#printRoot .brand-logo-print{
+  line-height:0;
+  text-align:center;
+  border-left:1.2px solid #b7bdc1;
+  padding-left:3.8mm;
+}
+#printRoot .brand-logo-print img{
+  width:22mm;
+  max-height:14.5mm;
+  object-fit:contain;
+}
+#printRoot .brand-text-print{
+  text-align:right;
+  color:#061640;
+  font-weight:900;
+  line-height:1.22;
+  white-space:nowrap;
+}
+#printRoot .brand-text-print .edu{
+  display:block;
+  font-size:10.4px;
+  margin-bottom:1.1mm;
+}
+#printRoot .brand-text-print .school{
+  display:block;
+  font-size:12.2px;
+}
+#printRoot .title-print{
+  text-align:center;
+  color:#15445a;
+  font-weight:900;
+  font-size:18.2px;
+  line-height:1.15;
+  margin:0 0 2.5mm;
+}
+#printRoot .section-label-print{
+  margin:1.25mm 0 .7mm;
+  padding:2px 6px;
+  border-radius:4px;
+  background:linear-gradient(135deg,#15445a,#0da9a6);
+  color:#fff;
+  font-size:9.7px;
+  line-height:1.2;
+  font-weight:900;
+}
+#printRoot table.print-table{
+  width:100%;
+  border-collapse:collapse;
+  table-layout:fixed;
+  margin:.8mm 0;
+}
+#printRoot table.print-table th,
+#printRoot table.print-table td{
+  border:1px solid #d3e3e5;
+  padding:3px 4px;
+  text-align:center;
+  vertical-align:middle;
+  font-size:9.3px;
+  line-height:1.25;
+  font-weight:700;
+  color:#102f3a;
+  word-break:break-word;
+}
+#printRoot table.print-table th{
+  background:#edf7f7;
+  color:#15445a;
+  font-weight:900;
+}
+#printRoot .small-table th,
+#printRoot .small-table td{
+  padding:2.3px 4px!important;
+  font-size:8.7px!important;
+  line-height:1.22!important;
+}
+#printRoot .preliminary-print{
+  border:1px solid #f1d08a;
+  background:linear-gradient(135deg,#fffbea,#fffdf4);
+  border-radius:7px;
+  padding:5px 7px;
+  color:#61430b;
+  font-size:8.15px;
+  line-height:1.42;
+  font-weight:800;
+  margin-top:.9mm;
+}
+#printRoot .preliminary-print b{
+  display:block;
+  color:#7a4d00;
+  font-size:9.4px;
+  margin-bottom:1px;
+}
+#printRoot .signature-row-print{
+  display:grid;
+  grid-template-columns:1fr 63mm;
+  gap:4mm;
+  align-items:stretch;
+  margin-top:1.3mm;
+}
+#printRoot .ack-print{
+  border:1px solid #d8e4e5;
+  border-radius:7px;
+  padding:5px 7px;
+  font-size:9px;
+  line-height:1.45;
+  font-weight:700;
+  color:#28495a;
+  min-height:28mm;
+}
+#printRoot .sig-print-box{
+  border:1px solid #d8e4e5;
+  border-radius:7px;
+  overflow:hidden;
+  min-height:28mm;
+  display:flex;
+  flex-direction:column;
+  background:#fff;
+}
+#printRoot .sig-print-label{
+  background:#edf7f7;
+  color:#15445a;
+  text-align:center;
+  font-size:9.5px;
+  line-height:1.2;
+  padding:3px;
+  font-weight:900;
+  border-bottom:1px solid #d8e4e5;
+}
+#printRoot .sig-print-body{
+  flex:1;
+  min-height:22mm;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+#printRoot .sig-print-body img{
+  width:78%;
+  height:20mm;
+  max-height:20mm;
+  object-fit:contain;
+  display:block;
+}
+#printRoot .no-sig-print{
+  color:#99a;
+  font-size:8.5px;
+  font-weight:800;
+}
+#printRoot .admin-footer-print{
+  margin-top:1.8mm;
+  border-top:1px solid #d8e4e5;
+  padding-top:2.2mm;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12mm;
+  text-align:center;
+  flex-shrink:0;
+}
+#printRoot .admin-person-print{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:2.4mm;
+  min-height:13mm;
+}
+#printRoot .admin-person-print b{
+  font-size:10.2px;
+  line-height:1.15;
+  color:#15445a;
+  font-weight:900;
+  margin:0;
+  padding:0;
+  border:0;
+  text-decoration:none;
+}
+#printRoot .admin-person-print span{
+  font-size:9.8px;
+  line-height:1.15;
+  color:#374151;
+  font-weight:800;
+  margin:0;
+  padding:0;
+  border:0;
+  text-decoration:none;
+}
+@media screen and (max-width:900px){
+  body.printing-ready #printRoot{display:block!important;}
+}
+@media print{
+  @page{size:A4 portrait;margin:0;}
+  html,body{
+    width:210mm!important;
+    height:297mm!important;
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+    overflow:hidden!important;
+  }
+  body{display:block!important;}
+  body > *:not(#printRoot){display:none!important;}
+  #printRoot{
+    display:block!important;
+    position:fixed!important;
+    inset:0!important;
+    width:210mm!important;
+    height:297mm!important;
+    margin:0!important;
+    padding:0!important;
+    background:#fff!important;
+    overflow:hidden!important;
+    z-index:999999!important;
+  }
+  #printRoot .viewer-print,
+  #printRoot .sheet-wrap-print{
+    display:block!important;
+    padding:0!important;
+    margin:0!important;
+  }
+  #printRoot .sheet-print{
+    width:210mm!important;
+    height:297mm!important;
+    margin:0!important;
+    box-shadow:none!important;
+    overflow:hidden!important;
+    position:fixed!important;
+    inset:0!important;
+    break-inside:avoid!important;
+    page-break-inside:avoid!important;
+    transform:none!important;
+  }
+}
+</style>
 </head>
 <body>
   <div class="top-ribbon"></div>
@@ -1564,17 +1771,24 @@
     </section>
   </main>
 
-  <div id="printRoot" class="viewer print-root" aria-hidden="true">
-    <div class="sheet-wrap">
-      <div class="sheet" id="printSheetPage">
-        <img src="background4.jpg" class="band" alt="">
-        <div class="main print-main">
-          <div class="print-sheet" id="printSheet"></div>
+  <section id="preview" class="preview" aria-live="polite">
+    <div class="preview-card">
+      <div class="preview-head">
+        <h2>معاينة الاستمارة قبل الطباعة</h2>
+        <div class="preview-actions">
+          <button class="btn-secondary" type="button" onclick="doPrint()">تنزيل PDF</button>
+          <button class="btn-secondary" type="button" onclick="closePreview()">إغلاق</button>
         </div>
-        <img src="background5.jpg" class="band" alt="">
+      </div>
+      <div class="preview-body">
+        <div class="print-page">
+          <img src="background4.jpg" class="print-band" alt="">
+          <div class="print-content"><div class="print-sheet" id="printSheet"></div></div>
+          <img src="background5.jpg" class="print-band" alt="">
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 
   <script>
     const maxHours = 24;
@@ -1726,17 +1940,32 @@
 
     function doPrint(){
       buildPrintSheet();
+      const previewEl = document.getElementById("preview");
+      previewEl.classList.add("print-direct");
+      previewEl.style.display = "block";
       document.body.classList.add("printing-now");
-      setTimeout(()=>window.print(), 120);
+
+      requestAnimationFrame(()=>{
+        requestAnimationFrame(()=>{
+          fitPrintSheetToOnePage();
+          window.print();
+        });
+      });
     }
 
     window.addEventListener("afterprint",()=>{
+      const previewEl = document.getElementById("preview");
+      previewEl.classList.remove("print-direct");
+      if(!previewEl.classList.contains("manual-preview")) previewEl.style.display = "none";
       document.body.classList.remove("printing-now");
     });
 
     function fitPrintSheetToOnePage(){
       const sheet = document.getElementById("printSheet");
       if(!sheet) return;
+
+      // مهم للجوال: لا نستخدم transform: scale لأنه يجعل الورقة تظهر صغيرة أو مقصوصة.
+      // الضغط يتم عبر CSS فقط مع إبقاء الصفحة بعرض كامل داخل نافذة الطباعة.
       sheet.classList.add("compact-print","fit-one-page");
       sheet.style.transform = "none";
       sheet.style.width = "100%";
@@ -1937,15 +2166,144 @@
 
     function openPreview(){
       buildPrintSheet();
-      const root = document.getElementById("printRoot");
-      if(root) root.style.display = "flex";
+      const previewEl = document.getElementById("preview");
+      previewEl.classList.remove("pdf-capture");
+      previewEl.style.display = "block";
       window.scrollTo({top:0,behavior:"smooth"});
     }
 
     function closePreview(){
-      const root = document.getElementById("printRoot");
-      if(root) root.style.display = "none";
+      const previewEl = $("preview");
+      previewEl.classList.remove("manual-preview","print-direct");
+      previewEl.style.display = "none";
     }
   </script>
+
+
+<div id="printRoot" aria-hidden="true">
+  <div class="viewer-print">
+    <div class="sheet-wrap-print">
+      <div class="sheet-print" id="a4PrintSheet">
+        <img src="background4.jpg" class="band-print" alt="">
+        <div class="main-print" id="a4PrintContent"></div>
+        <img src="background5.jpg" class="band-print" alt="">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+(function(){
+  function safe(id){ return document.getElementById(id); }
+  function val(id){ const el=safe(id); return el ? el.value : ''; }
+  function htmlEscape(v){
+    return String(v || '—').replace(/[&<>"']/g, function(m){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m];
+    });
+  }
+  function selectedRowsFinal(){
+    if(typeof selectedRows === 'function') return selectedRows();
+    return [];
+  }
+  function checkedTasksFinal(){
+    if(typeof checkedTasks === 'function') return checkedTasks();
+    return [];
+  }
+  function signatureFinal(){
+    if(typeof getSignatureData === 'function') return getSignatureData();
+    return '';
+  }
+  function hDateFinal(){
+    const h=safe('hDate');
+    return h ? h.textContent : 'التاريخ: .........................';
+  }
+  function buildA4Print(){
+    const target=safe('a4PrintContent');
+    if(!target) return;
+    const rows=selectedRowsFinal();
+    const tasks=checkedTasksFinal();
+    const total=typeof calculateTotal==='function' ? calculateTotal() : 0;
+    const sig=signatureFinal();
+    const subj=(window.subjectNames && safe('specialty')) ? (subjectNames[safe('specialty').value] || '') : '';
+    const rowsHtml = rows.length ? rows.map(function(r){
+      return '<tr><td>'+htmlEscape(r.subject)+'</td><td>'+htmlEscape(r.grade)+'</td><td>'+htmlEscape(r.section)+'</td><td>'+htmlEscape(r.hours)+'</td></tr>';
+    }).join('') : '<tr><td colspan="4">لم يتم اختيار شعب.</td></tr>';
+    const taskHtml = tasks.length ? tasks.map(function(t){
+      return '<tr><td>'+htmlEscape(t.name)+'</td><td>'+htmlEscape(t.pr)+'</td></tr>';
+    }).join('') : '<tr><td colspan="2">لم يتم اختيار تكليفات.</td></tr>';
+    target.innerHTML = `
+      <div class="brand-print">
+        <div class="brand-logo-print"><img src="logomoe.png" alt="شعار وزارة التعليم" onerror="this.style.display='none'"></div>
+        <div class="brand-text-print">
+          <span class="edu">الإدارة العامة للتعليم بمنطقة المدينة المنورة</span>
+          <span class="school">الابتدائية المائة ومتوسطة أم عمار بن ياسر</span>
+        </div>
+      </div>
+      <div class="title-print">استمارة رغبات توزيع المنهج والتكليفات المدرسية</div>
+
+      <table class="print-table">
+        <tr><th>اسم المعلمة</th><td>${htmlEscape(val('teacherName'))}</td><th>التخصص</th><td>${htmlEscape(subj)}</td></tr>
+        <tr><th>رتبة المعلمة</th><td>${htmlEscape(val('teacherRank'))}</td><th>المؤهل العلمي</th><td>${htmlEscape(val('qualification'))}</td></tr>
+        <tr><th>سنوات الخبرة</th><td colspan="3">${htmlEscape(val('experience'))}</td></tr>
+      </table>
+
+      <div class="section-label-print">رغبات توزيع المنهج</div>
+      <table class="print-table small-table">
+        <thead><tr><th>المادة</th><th>الصف</th><th>الشعبة</th><th>عدد الحصص</th></tr></thead>
+        <tbody>${rowsHtml}<tr><th colspan="3">إجمالي النصاب</th><th>${total} / 24</th></tr></tbody>
+      </table>
+
+      <div class="section-label-print">التكليفات المدرسية المرغوبة</div>
+      <table class="print-table small-table">
+        <thead><tr><th>التكليف المدرسي المرغوب</th><th style="width:26mm">الأولوية</th></tr></thead>
+        <tbody>${taskHtml}</tbody>
+      </table>
+
+      <table class="print-table small-table">
+        <tr><th style="width:34mm">ملاحظات خاصة بالتوزيع</th><td>${htmlEscape(val('notes') || '—')}</td></tr>
+        <tr><th>التشاور بين أعضاء التخصص</th><td>${htmlEscape(val('consult') || '—')} — الأسماء: ${htmlEscape(val('consultNames') || '—')}</td></tr>
+        <tr><th>مرئيات ومقترحات</th><td>${htmlEscape(val('suggestions') || '—')}</td></tr>
+      </table>
+
+      <div class="section-label-print">التوزيع المبدئي</div>
+      <div class="preliminary-print">
+        <b>ملاحظة هامة بشأن التوزيع</b>
+        يُعد هذا التوزيع توزيعًا مبدئيًا مبنيًا على الوضع الراهن للمدرسة واحتياجها الحالي، ويخضع للمراجعة والتعديل في حال حدوث متغيرات تؤثر في ملاك المدرسة أو أنصبة المعلمات أو الاحتياج التعليمي، مثل النقل أو الندب أو التكليف أو المباشرات الجديدة أو غيرها من المستجدات.
+        كما تأمل الإدارة المدرسية من أعضاء التخصص التوصل إلى أفضل صورة للتوزيع بالتشاور والتوافق فيما بينهم، مع مراعاة رغبات المعلمات قدر الإمكان، وبخاصة فيما يتعلق بالتكليفات المدرسية التي تسهم في خدمة الميدان التعليمي وتحقيق مصلحة المدرسة.
+        وفي حال عدم التوصل إلى اتفاق بين أعضاء التخصص، أو وجود تعارض في الرغبات، فإن للإدارة المدرسية حق اعتماد التوزيع المناسب وفق المصلحة التعليمية والتنظيمية للمدرسة، ويعد قرارها في هذا الشأن نهائيًا.
+      </div>
+
+      <div class="signature-row-print">
+        <div class="ack-print">
+          أقر بأن البيانات والرغبات المدونة في هذه الاستمارة تمثل رغبتي الحالية، مع علمي بأن التوزيع النهائي للمنهج والتكليفات المدرسية يتم وفق احتياج المدرسة ومصلحة العمل.
+          <br><b>${htmlEscape(hDateFinal())}</b>
+          <br>اسم المعلمة: ${htmlEscape(val('teacherName'))}
+        </div>
+        <div class="sig-print-box">
+          <div class="sig-print-label">التوقيع الإلكتروني</div>
+          <div class="sig-print-body">${sig ? '<img src="'+sig+'" alt="التوقيع الإلكتروني">' : '<span class="no-sig-print">لم يتم توقيع الاستمارة</span>'}</div>
+        </div>
+      </div>
+
+      <div class="admin-footer-print">
+        <div class="admin-person-print"><b>وكيلة الشؤون التعليمية</b><span>ليلى الخطيب</span></div>
+        <div class="admin-person-print"><b>مديرة المدرسة</b><span>عفاف زعير</span></div>
+      </div>
+    `;
+  }
+  window.doPrint = function(){
+    buildA4Print();
+    document.body.classList.add('printing-ready');
+    const preview=safe('preview');
+    if(preview) preview.style.display='none';
+    setTimeout(function(){ window.print(); }, 180);
+  };
+  window.addEventListener('afterprint', function(){
+    document.body.classList.remove('printing-ready');
+  });
+})();
+</script>
+
 </body>
 </html>
